@@ -1,4 +1,4 @@
-package ru.breev.se;
+package ru.breev.se.homework1;
 
 public class Variable {
     public static void main(String[] args) {
@@ -41,8 +41,7 @@ public class Variable {
         boolean res = xI.equals(yI);
         if (res) {
             System.out.println("xI = yI");
-        }
-        else {
+        } else {
             System.out.println("yI != xI");
         }
 

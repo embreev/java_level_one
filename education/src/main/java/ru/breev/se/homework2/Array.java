@@ -1,8 +1,9 @@
 package ru.breev.se.homework2;
 
 public class Array {
-    static final byte[] arrBit = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
-    static final int[] arrInt = new int[8];
+    private static final byte[] arrBit = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
+    private static final int[] arrInt = new int[8];
+    private static final int[] arrNew = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
 
     public static void main(String[] args) {
         //1
@@ -19,6 +20,14 @@ public class Array {
             else arrInt[i] = arrInt[i - 1] + 3;
         }
         for (int element : arrInt) {
+            System.out.printf("%s ", element);
+        }
+        //3
+        System.out.println();
+        for (int i = 0; i < arrNew.length; i++) {
+            if (arrNew[i] < 6) arrNew[i] *= 2;
+        }
+        for (int element : arrNew) {
             System.out.printf("%s ", element);
         }
     }

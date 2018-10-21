@@ -2,13 +2,13 @@ package ru.breev.se.homework2;
 
 import java.util.Scanner;
 
-public class List {
+public class ListExample {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter array dimension:");
         int dimension = scanner.nextInt();
-        List list = new List();
-        int[] newList = list.fillArray(50);
+        ListExample list = new ListExample();
+        int[] newList = list.fillArray(dimension);
         for (int element : newList) System.out.printf("%s ", element);
         System.out.printf("\nMin = %s, Max = %s", list.getMin(newList), list.getMax(newList));
     }
@@ -22,7 +22,7 @@ public class List {
     }
 
     public int getMin(int[] array) {
-        int min = 0;
+        int min = 1000000;
         for (int element : array) {
             if (element < min) min = element;
         }

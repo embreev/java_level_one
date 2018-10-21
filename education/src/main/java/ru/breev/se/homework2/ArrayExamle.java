@@ -1,6 +1,6 @@
 package ru.breev.se.homework2;
 
-public class Array {
+public class ArrayExamle {
     private static final byte[] arrBit = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
     private static final int[] arrInt = new int[8];
     private static final int[] arrNew = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};

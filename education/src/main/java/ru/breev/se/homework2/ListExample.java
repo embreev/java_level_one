@@ -13,13 +13,14 @@ public class ListExample {
         for (int element : newList) System.out.printf("%s ", element);
         System.out.printf("\nMin = %s, Max = %s", list.getMin(newList), list.getMax(newList));
         //6
-        int[] arrayTest = {1, 2, 3};
-        System.out.printf("\n%s", list.checkBalance(arrayTest));
-        //7-1
-        System.out.printf("\nEnter shift element:\n");
+        //check array
+        //int[] arrayTest = {1, 2, 3};
+        System.out.printf("\nArray is balanced? - %s", list.checkBalance(newList));
+        //7
+        System.out.printf("\n\nEnter shift element:\n");
         int shift = scanner.nextInt();
-        int[] arrayShifted = list.shiftElementArray(newList, shift);
-        for (int element : arrayShifted) System.out.printf("%s ", element);
+        newList = list.shiftElementArray(newList, shift);
+        for (int element : newList) System.out.printf("%s ", element);
     }
 
     public int[] fillArray(int dimension) {
@@ -31,7 +32,8 @@ public class ListExample {
     }
 
     public int getMin(int[] array) {
-        int min = 1000000;
+        //что-то фантазии не хватило )
+        int min = 2147483647;
         for (int element : array) {
             if (element < min) min = element;
         }
@@ -39,7 +41,8 @@ public class ListExample {
     }
 
     public int getMax(int[] array) {
-        int max = 0;
+        //что-то фантазии не хватило )
+        int max = -2147483648;
         for (int element : array) {
             if (element > max) max = element;
         }

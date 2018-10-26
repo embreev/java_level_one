@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class ListExample {
     public static void main(String[] args) {
         //5
-        Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
         System.out.println("Enter array dimension:");
-        int dimension = scanner.nextInt();
+        final int dimension = scanner.nextInt();
         ListExample list = new ListExample();
         int[] newList = list.fillArray(dimension);
         for (int element : newList) System.out.printf("%s ", element);
@@ -18,7 +18,7 @@ public class ListExample {
         System.out.printf("\nArray is balanced? - %s", list.checkBalance(newList));
         //7
         System.out.printf("\n\nEnter shift element:\n");
-        int shift = scanner.nextInt();
+        final int shift = scanner.nextInt();
         newList = list.shiftElementArray(newList, shift);
         for (int element : newList) System.out.printf("%s ", element);
     }

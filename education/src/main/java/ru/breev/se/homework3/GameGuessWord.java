@@ -13,6 +13,9 @@ public class GameGuessWord {
         String computerWord = w.chooseRandomWord();
         if (w.compareWord(userWord, computerWord)) System.out.printf("User WIN!");
         else System.out.printf("User Word = %s, Computer Word = %s\n", userWord, computerWord);
+        for (char letter : w.compareLetter(userWord, computerWord)) {
+            System.out.printf("%s", letter);
+        }
     }
 
     private static String chooseRandomWord() {
@@ -29,5 +32,14 @@ public class GameGuessWord {
         boolean result = false;
         if (userWord.equals(computerWord)) result = true;
         return result;
+    }
+
+    private char[] compareLetter(String userWord, String computerWord) {
+        char[] letterArray = {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'};
+        int dimension = (userWord.length() < computerWord.length()) ? userWord.length() : computerWord.length();
+        for (int i = 0; i < dimension; i++) {
+            if (userWord.charAt(i) == computerWord.charAt(i)) letterArray[i] = userWord.charAt(i);
+        }
+        return letterArray;
     }
 }

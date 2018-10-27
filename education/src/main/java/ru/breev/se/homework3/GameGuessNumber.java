@@ -7,16 +7,15 @@ public class GameGuessNumber {
 
     public static void main(String[] args) {
         boolean answer = true;
-        Scanner sc = new Scanner(System.in);
-        GameGuessNumber game = new GameGuessNumber();
+        final Scanner sc = new Scanner(System.in);
+        final GameGuessNumber game = new GameGuessNumber();
         String gameOver = "";
         while (answer) {
             System.out.printf("Run the Game!\n");
-            int computerNumber = game.guessNumber();
+            final int computerNumber = game.guessNumber();
             int attempt = 3;
             while (attempt != 0) {
                 System.out.printf("Attempts left = %s\n", attempt);
-                System.out.printf("NumberPC = %s\n", computerNumber);
                 System.out.printf("Enter number range 0 - 9:\n");
                 int userNumber = sc.nextInt();
                 System.out.println(game.checkNumber(userNumber, computerNumber));

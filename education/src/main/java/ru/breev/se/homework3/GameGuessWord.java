@@ -6,14 +6,14 @@ import java.util.Scanner;
 public class GameGuessWord {
     public static void main(String[] args) {
         System.out.printf("Run the Game!\n");
-        Scanner sc = new Scanner(System.in);
+        final Scanner sc = new Scanner(System.in);
         GameGuessWord w = new GameGuessWord();
-        String computerWord = w.chooseRandomWord();
+        final String computerWord = w.chooseRandomWord();
         while (true) {
             System.out.printf("Enter word:\n");
             String userWord = sc.nextLine().toLowerCase();
             if (w.compareWord(userWord, computerWord)) {
-                System.out.printf("User WIN! Word = %s", userWord);
+                System.out.printf("User WIN! Word = %s\n", userWord);
                 System.exit(0);
             }
             for (char letter : w.compareLetter(userWord, computerWord)) {
@@ -27,8 +27,8 @@ public class GameGuessWord {
                 "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak",
                 "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear",
                 "pepper", "pineapple", "pumpkin", "potato"};
-        Random r = new Random();
-        String randomWord = words[r.nextInt(words.length)];
+        final Random r = new Random();
+        final String randomWord = words[r.nextInt(words.length)];
         return randomWord;
     }
 
@@ -39,8 +39,8 @@ public class GameGuessWord {
     }
 
     private char[] compareLetter(String userWord, String computerWord) {
-        char[] letterArray = {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'};
-        int dimension = (userWord.length() < computerWord.length()) ? userWord.length() : computerWord.length();
+        final char[] letterArray = {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'};
+        final int dimension = (userWord.length() < computerWord.length()) ? userWord.length() : computerWord.length();
         for (int i = 0; i < dimension; i++) {
             if (userWord.charAt(i) == computerWord.charAt(i)) letterArray[i] = userWord.charAt(i);
         }

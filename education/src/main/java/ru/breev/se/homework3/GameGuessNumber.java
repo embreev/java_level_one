@@ -30,7 +30,7 @@ public class GameGuessNumber {
                 attempt -= 1;
             }
             System.out.printf("%s\n", gameOver);
-            System.out.printf("Game again? 1 - yes, 0 - no\n");
+            System.out.printf("Play again? 1 - yes, 0 - no\n");
             answer = (sc.nextInt() == 1) ? true : false;
         }
     }

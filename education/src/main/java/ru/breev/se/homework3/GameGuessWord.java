@@ -5,20 +5,24 @@ import java.util.Scanner;
 
 public class GameGuessWord {
     public static void main(String[] args) {
-        boolean answer = true;
-        System.out.printf("Enter word:\n");
+        System.out.printf("Run the Game!\n");
         Scanner sc = new Scanner(System.in);
         GameGuessWord w = new GameGuessWord();
-        String userWord = sc.nextLine().toLowerCase();
         String computerWord = w.chooseRandomWord();
-        if (w.compareWord(userWord, computerWord)) System.out.printf("User WIN!");
-        else System.out.printf("User Word = %s, Computer Word = %s\n", userWord, computerWord);
-        for (char letter : w.compareLetter(userWord, computerWord)) {
-            System.out.printf("%s", letter);
+        while (true) {
+            System.out.printf("Enter word:\n");
+            String userWord = sc.nextLine().toLowerCase();
+            if (w.compareWord(userWord, computerWord)) {
+                System.out.printf("User WIN! Word = %s", userWord);
+                System.exit(0);
+            }
+            for (char letter : w.compareLetter(userWord, computerWord)) {
+                System.out.printf("%s", letter);
+            }
         }
     }
 
-    private static String chooseRandomWord() {
+    private String chooseRandomWord() {
         final String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado",
                 "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak",
                 "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear",
@@ -28,7 +32,7 @@ public class GameGuessWord {
         return randomWord;
     }
 
-    private static boolean compareWord(String userWord, String computerWord) {
+    private boolean compareWord(String userWord, String computerWord) {
         boolean result = false;
         if (userWord.equals(computerWord)) result = true;
         return result;

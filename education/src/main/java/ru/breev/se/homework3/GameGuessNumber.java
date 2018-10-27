@@ -1,5 +1,6 @@
 package ru.breev.se.homework3;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameGuessNumber {
@@ -16,6 +17,7 @@ public class GameGuessNumber {
             while (attempt != 0) {
                 System.out.printf("Attempts left = %s\n", attempt);
                 System.out.printf("NumberPC = %s\n", computerNumber);
+                System.out.printf("Enter number range 0 - 9:\n");
                 int userNumber = sc.nextInt();
                 System.out.println(game.checkNumber(userNumber, computerNumber));
                 if (userNumber == computerNumber) {
@@ -34,7 +36,8 @@ public class GameGuessNumber {
     }
 
     private int guessNumber() {
-        int numberPC = (int) (Math.random() * 10);
+        Random random = new Random();
+        int numberPC = random.nextInt(10);
         return numberPC;
     }
 

@@ -4,19 +4,20 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GameGuessWord {
+
     public static void main(String[] args) {
         System.out.printf("Run the Game!\n");
-        final Scanner sc = new Scanner(System.in);
-        GameGuessWord w = new GameGuessWord();
-        final String computerWord = w.chooseRandomWord();
+        final Scanner scanner = new Scanner(System.in);
+        final GameGuessWord word = new GameGuessWord();
+        final String computerWord = word.chooseRandomWord();
         while (true) {
             System.out.printf("Enter word:\n");
-            String userWord = sc.nextLine().toLowerCase();
-            if (w.compareWord(userWord, computerWord)) {
+            final String userWord = scanner.nextLine().toLowerCase();
+            if (word.compareWord(userWord, computerWord)) {
                 System.out.printf("User WIN! Word = %s\n", userWord);
                 System.exit(0);
             }
-            for (char letter : w.compareLetter(userWord, computerWord)) {
+            for (char letter : word.compareLetter(userWord, computerWord)) {
                 System.out.printf("%s", letter);
             }
         }
@@ -46,4 +47,5 @@ public class GameGuessWord {
         }
         return letterArray;
     }
+
 }

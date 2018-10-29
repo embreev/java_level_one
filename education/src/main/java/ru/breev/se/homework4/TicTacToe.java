@@ -1,36 +1,78 @@
 package ru.breev.se.homework4;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final TicTacToe game = new TicTacToe();
+    private static final char USER_CELL = 'X';
+    private static final char COMPUTER_CELL = 'O';
+    private static final char EMPTY_CELL = '.';
 
     public static void main(String[] args) {
-        System.out.printf("Run the Game\n");
-        System.out.printf("Enter Field size:\n");
-//        System.out.printf("Enter the number of winning blocks:\n");
-//        final int winBlock = scanner.nextInt();
-        final int fieldSize = scanner.nextInt();
-        char[][] array = game.fillArray(fieldSize);
-        game.drawField(array);
-        game.goPlayer(array, fieldSize);
-//        array = game.refillArray(array, userX, userY, "user");
-        game.drawField(array);
-//        game.checkWin(array);
-//        game.goPC();
+        game.runGame();
     }
 
-//    private boolean checkWin(char[][] array) {
-//        for (int x; x < array.length; x++) {
-//            for (int y; y < array.length; y++) {
-//                array
-//            }
-//
-//        }
-//        return win;
-//    }
+    private void runGame() {
+        System.out.printf("Run the Game\n");
+        System.out.printf("Enter Field size:\n");
+        final int fieldSize = scanner.nextInt();
+        int winLine;
+        do {
+            System.out.printf("Enter the number of winning cells:\n");
+            winLine = scanner.nextInt();
+        } while (fieldSize < winLine);
+        char[][] array = game.fillArray(fieldSize, EMPTY_CELL);
+        game.drawField(array);
+        boolean checkGame = true;
+        while (checkGame) {
+            game.goPlayer(array, fieldSize);
+            game.drawField(array);
+            if (game.checkWin(array, USER_CELL, winLine)) {
+                System.out.printf("User WIN!\n");
+                checkGame = false;
+                break;
+            }
+            game.goComputer(array, fieldSize);
+            game.drawField(array);
+            if (game.checkWin(array, COMPUTER_CELL, winLine)) {
+                System.out.printf("Computer WIN!\n");
+                checkGame = false;
+                break;
+            }
+        }
+    }
+
+    private boolean checkWin(char[][] array, char block, int winLine) {
+        int diagonalCounter = 0;
+        for (int x = 0; x < array.length; x++) {
+            for (int y = 0; y < array.length; y++) {
+                if ((x == y) && (array[x][y] == block)) diagonalCounter += 1;
+            }
+        }
+        if (diagonalCounter != winLine) diagonalCounter = 0;
+        for (int x = 0; x < array.length; x++) {
+            for (int y = 0; y < array.length; y++) {
+                if (x == (x + y - array.length + 1) && (array[x][y] == block)) diagonalCounter += 1;
+            }
+        }
+        if (diagonalCounter != winLine) diagonalCounter = 0;
+        int rowCounter = 0;
+        for (int x = 0; x < array.length; x++) {
+            for (int y = 0; y < array.length; y++) {
+
+            }
+        }
+        int columnCounter = 0;
+        for (int x = 0; x < array.length; x++) {
+            for (int y = 0; y < array.length; y++) {
+
+            }
+        }
+        return (diagonalCounter == winLine || rowCounter == winLine || columnCounter == winLine) ? true : false;
+    }
 
     private void goPlayer(char[][] array, int fieldSize) {
         int x;
@@ -41,12 +83,24 @@ public class TicTacToe {
             System.out.printf("Enter coordinate - y:\n");
             y = scanner.nextInt() - 1;
         }
-        while (game.checkCell(x, y, fieldSize));
-        array[x][y] = 'X';
+        while (game.checkCell(array, x, y, fieldSize));
+        array[x][y] = USER_CELL;
     }
 
-    private boolean checkCell(int x, int y, int fieldSize) {
-        boolean result = (x < 0 || x > fieldSize || y < 0 || y > fieldSize) ? true : false;
+    private void goComputer(char[][] array, int fieldSize) {
+        int x;
+        int y;
+        do {
+            x = new Random().nextInt(fieldSize);
+            y = new Random().nextInt(fieldSize);
+        } while (game.checkCell(array, x, y, fieldSize));
+        array[x][y] = COMPUTER_CELL;
+        System.out.printf("Computer x=%s, y=%s\n", x + 1, y + 1);
+    }
+
+    private boolean checkCell(char[][] array, int x, int y, int fieldSize) {
+        boolean result = (x < 0 || x >= fieldSize || y < 0 || y >= fieldSize ||
+                array[x][y] != EMPTY_CELL) ? true : false;
         if (result) System.out.printf("Incorrect coordinate...\n");
         return result;
     }
@@ -64,19 +118,13 @@ public class TicTacToe {
         System.out.printf("\n");
     }
 
-    private char[][] fillArray(int fieldSize) {
+    private char[][] fillArray(int fieldSize, char block) {
         final char[][] array = new char[fieldSize][fieldSize];
         for (int x = 0; x < array.length; x++) {
             for (int y = 0; y < array.length; y++) {
-                array[x][y] = '.';
+                array[x][y] = block;
             }
         }
-        return array;
-    }
-
-    private char[][] refillArray(char[][] array, int coordinateX, int coordinateY, String whoseTurn) {
-        if (whoseTurn.equals("user")) array[coordinateX][coordinateY] = 'X';
-        if (whoseTurn.equals("pc")) array[coordinateX][coordinateY] = 'O';
         return array;
     }
 }

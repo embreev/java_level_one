@@ -5,22 +5,18 @@ import java.util.Scanner;
 public class TicTacToe {
 
     private static final Scanner scanner = new Scanner(System.in);
+    private static final TicTacToe game = new TicTacToe();
 
     public static void main(String[] args) {
-        final char userBlock = 'X';
-        final char computerBlock = 'O';
-        final char emptyBlock = '.';
-        final TicTacToe game = new TicTacToe();
         System.out.printf("Run the Game\n");
-        System.out.printf("Enter file size:\n");
-        final int fieldSize = scanner.nextInt();
+        System.out.printf("Enter Field size:\n");
 //        System.out.printf("Enter the number of winning blocks:\n");
 //        final int winBlock = scanner.nextInt();
+        final int fieldSize = scanner.nextInt();
         char[][] array = game.fillArray(fieldSize);
         game.drawField(array);
-        int userX = game.goPlayer('x', fieldSize);
-        int userY = game.goPlayer('y', fieldSize);
-        array = game.refillArray(array, userX, userY, "user");
+        game.goPlayer(array, fieldSize);
+//        array = game.refillArray(array, userX, userY, "user");
         game.drawField(array);
 //        game.checkWin(array);
 //        game.goPC();
@@ -36,14 +32,23 @@ public class TicTacToe {
 //        return win;
 //    }
 
-    private int goPlayer(char coordinate, int fieldSize) {
-        System.out.printf("Enter coordinate - %s:\n", coordinate);
-        int userCoordinate = scanner.nextInt();
-        if (userCoordinate > fieldSize) {
-            System.out.printf("Incorrect coordinate...\n");
-            goPlayer(coordinate, fieldSize);
+    private void goPlayer(char[][] array, int fieldSize) {
+        int x;
+        int y;
+        do {
+            System.out.printf("Enter coordinate - x:\n");
+            x = scanner.nextInt() - 1;
+            System.out.printf("Enter coordinate - y:\n");
+            y = scanner.nextInt() - 1;
         }
-        return userCoordinate - 1;
+        while (game.checkCell(x, y, fieldSize));
+        array[x][y] = 'X';
+    }
+
+    private boolean checkCell(int x, int y, int fieldSize) {
+        boolean result = (x < 0 || x > fieldSize || y < 0 || y > fieldSize) ? true : false;
+        if (result) System.out.printf("Incorrect coordinate...\n");
+        return result;
     }
 
     private void drawField(char[][] array) {

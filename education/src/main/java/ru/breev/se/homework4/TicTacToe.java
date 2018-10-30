@@ -26,20 +26,19 @@ public class TicTacToe {
         } while (fieldSize < winLine);
         char[][] array = game.fillArray(fieldSize, EMPTY_CELL);
         game.drawField(array);
-        boolean checkGame = true;
-        while (checkGame) {
+        while (true) {
+            game.checkEmpty(array);
             game.goPlayer(array, fieldSize);
             game.drawField(array);
             if (game.checkWin(array, USER_CELL, winLine)) {
                 System.out.printf("User WIN!\n");
-                checkGame = false;
                 break;
             }
+            game.checkEmpty(array);
             game.goComputer(array, fieldSize);
             game.drawField(array);
             if (game.checkWin(array, COMPUTER_CELL, winLine)) {
                 System.out.printf("Computer WIN!\n");
-                checkGame = false;
                 break;
             }
         }
@@ -53,25 +52,40 @@ public class TicTacToe {
             }
         }
         if (diagonalCounter != winLine) diagonalCounter = 0;
+        int diagonalReversCounter = 0;
         for (int x = 0; x < array.length; x++) {
             for (int y = (array.length - 1); y >= 0; y--) {
-                if (x == (array.length - y - 1) && (array[x][y] == block)) diagonalCounter += 1;
+                if (x == (array.length - y - 1) && (array[x][y] == block)) diagonalReversCounter += 1;
             }
         }
-        if (diagonalCounter != winLine) diagonalCounter = 0;
+        if (diagonalReversCounter != winLine) diagonalReversCounter = 0;
         int rowCounter = 0;
-        for (int x = 0; x < array.length; x++) {
-            for (int y = 0; y < array.length; y++) {
-
-            }
-        }
         int columnCounter = 0;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length; j++) {
+                if (array[i][j] == block) rowCounter += 1;
+                if (array[j][i] == block) columnCounter += 1;
+            }
+            if (rowCounter != winLine) rowCounter = 0;
+            else break;
+            if (columnCounter != winLine) columnCounter = 0;
+            else break;
+        }
+        return (diagonalCounter == winLine || diagonalReversCounter == winLine
+                || rowCounter == winLine || columnCounter == winLine) ? true : false;
+    }
+
+    private void checkEmpty(char[][] array) {
+        boolean result = false;
         for (int x = 0; x < array.length; x++) {
             for (int y = 0; y < array.length; y++) {
-
+                if (array[x][y] == EMPTY_CELL) result = true;
             }
         }
-        return (diagonalCounter == winLine || rowCounter == winLine || columnCounter == winLine) ? true : false;
+        if (!result) {
+            System.out.printf("There is no winner in the game!");
+            System.exit(0);
+        }
     }
 
     private void goPlayer(char[][] array, int fieldSize) {

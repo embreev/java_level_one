@@ -54,8 +54,8 @@ public class TicTacToe {
         }
         if (diagonalCounter != winLine) diagonalCounter = 0;
         for (int x = 0; x < array.length; x++) {
-            for (int y = 0; y < array.length; y++) {
-                if (x == (x + y - array.length + 1) && (array[x][y] == block)) diagonalCounter += 1;
+            for (int y = (array.length - 1); y >= 0; y--) {
+                if (x == (array.length - y - 1) && (array[x][y] == block)) diagonalCounter += 1;
             }
         }
         if (diagonalCounter != winLine) diagonalCounter = 0;

@@ -252,8 +252,7 @@ public class TicTacToe {
         }
         return false;
     }
-
-    //    Random move computer
+    
     private void goRandomComputer(char[][] array, int fieldSize, int winLine) {
         int x;
         int y;

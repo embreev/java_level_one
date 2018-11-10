@@ -1,12 +1,19 @@
 package ru.breev.se.homework5.api;
 
-public interface IHuman {
-    public String getName();
-    public void setName(String name);
-    public int getAge();
-    public void setAge(int age);
-    public String getEmail();
-    public void setEmail(String email);
-    public String getPhone();
-    public void setPhone(String phone);
+public interface IPerson {
+    String getName();
+
+    void setName(String name);
+
+    int getAge();
+
+    void setAge(int age);
+
+    String getEmail();
+
+    void setEmail(String email);
+
+    String getPhone();
+
+    void setPhone(String phone);
 }

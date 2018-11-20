@@ -37,7 +37,7 @@ public interface ChatService {
     void  signOut(@WebParam Session session);
 
     @WebMethod
-    List<Message> getMessage(@WebParam Session session);
+    List<Message> getMessages(@WebParam Session session);
 
     @WebMethod
     void sendBroadCast(@WebParam Session session, @WebParam String text);

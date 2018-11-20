@@ -2,23 +2,23 @@ package ru.breev.se.homework6;
 
 public abstract class Animal {
 
-    public String color;
-    public String name;
+    private String color;
+    private String name;
+    static float maxDistanceRun;
+    static float maxDistanceSwim;
+    static float maxDistanceJump;
 
-    public String getColor() {
+    Animal(String color, String name) {
+        this.color = color;
+        this.name = name;
+    }
+
+    String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getName() {
+    protected String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     abstract void run(float distance);

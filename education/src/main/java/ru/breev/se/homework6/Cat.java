@@ -1,29 +1,29 @@
 package ru.breev.se.homework6;
 
-public class Cat extends Animal {
-
-    final static float MAX_DISTANCE_RUN = 200;
-    final static float MAX_DISTANCE_JUMP = 2;
+class Cat extends Animal {
 
     public Cat(String color, String name) {
-        super.color = color;
-        super.name = name;
+        super(color, name);
+        maxDistanceRun = (float) (200 * Math.random());
+        maxDistanceJump = (float) (2 * Math.random());
+        System.out.printf("maxDistanceRun = %f; ", maxDistanceRun);
+        System.out.printf("maxDistanceJump = %f.\n", maxDistanceJump);
     }
 
     @Override
     void run(float distance) {
-        final boolean result = distance <= MAX_DISTANCE_RUN;
-        System.out.println(result);
+        final boolean result = distance <= maxDistanceRun;
+        System.out.printf("Can a cat run %f? - %b\n", distance, result);
     }
 
     @Override
     void swim(float distance) {
-        System.out.println("null");
+        System.out.printf("Cat can not swim\n");
     }
 
     @Override
     void jump(float distance) {
-        final boolean result = distance <= MAX_DISTANCE_JUMP;
-        System.out.println(result);
+        final boolean result = distance <= maxDistanceJump;
+        System.out.printf("Can a cat jump %f? - %b\n", distance, result);
     }
 }

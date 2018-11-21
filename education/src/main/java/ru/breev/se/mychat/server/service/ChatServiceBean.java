@@ -4,12 +4,12 @@ import ru.breev.se.mychat.server.api.ChatService;
 import ru.breev.se.mychat.server.api.MessageService;
 import ru.breev.se.mychat.server.api.SessionService;
 import ru.breev.se.mychat.server.api.UserService;
-import ru.breev.se.mychat.server.api.ContactService;
 import ru.breev.se.mychat.server.model.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.List;
+import java.util.Set;
 
 @WebService(endpointInterface = "ru.breev.se.mychat.server.api.ChatService")
 public final class ChatServiceBean implements ChatService {
@@ -97,26 +97,31 @@ public final class ChatServiceBean implements ChatService {
     }
 
     @Override
-    @WebMethod
-    public void contactsAll(Session session) {
-
+    public void getContact(Session session) {
+        return;
     }
 
     @Override
     @WebMethod
-    public void contactCreate(Session session, String login) {
-
+    public Set<Contact> getAllContacts(Session session) {
+        return null;
     }
 
     @Override
     @WebMethod
-    public void contactRemove(Session session, String login) {
-
+    public void createContact(Session session, String login) {
+        return;
     }
 
     @Override
     @WebMethod
-    public void contactsRemoveAll(Session session) {
+    public void removeContact(Session session, String login) {
+        return;
+    }
 
+    @Override
+    @WebMethod
+    public void removeAllContacts(Session session) {
+        return;
     }
 }

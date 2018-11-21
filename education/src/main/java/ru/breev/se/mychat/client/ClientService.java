@@ -75,16 +75,16 @@ public class ClientService {
                     broadcast();
                     break;
                 case CMD_CONTACTS_ALL:
-                    contactsAll();
+                    getAllContacts();
                     break;
                 case CMD_CONTACT_CREATE:
-                    contactCreate();
+                    createContact();
                     break;
                 case CMD_CONTACT_REMOVE:
-                    contactRemove();
+                    removeContact();
                     break;
                 case CMD_CONTACTS_REMOVE_ALL:
-                    contactsRemoveAll();
+                    removeAllContacts();
                     break;
                 case CMD_HELP:
                     printCommand();
@@ -156,26 +156,31 @@ public class ClientService {
         chatService.sendBroadCast(session, message);
     }
 
-    private void contactsAll() {
-
+    private void getAllContacts() {
+        if (session == null) return;
+        final Set<Contact> contacts = chatService.getAllContacts(session);
+        for (final Contact contact: contacts) {
+            if (contact == null) continue;
+            System.out.printf("%s\n", contact.target);
+        }
     }
 
-    private void contactCreate() {
+    private void createContact() {
         if (session == null) return;
         System.out.print("Enter contact login for add:\n");
         final String login = scanner.nextLine();
-
+        chatService.createContact(session, login);
     }
 
-    private void contactRemove() {
+    private void removeContact() {
         if (session == null) return;
         System.out.print("Enter contact login for remove:\n");
         final String login = scanner.nextLine();
-
+        chatService.removeContact(session, login);
     }
 
-    private void contactsRemoveAll() {
+    private void removeAllContacts() {
         if (session == null) return;
-
+        chatService.removeAllContacts(session);
     }
 }

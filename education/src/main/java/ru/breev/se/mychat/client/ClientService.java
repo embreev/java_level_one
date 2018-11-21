@@ -42,7 +42,7 @@ public class ClientService {
     public void run() {
         String cmd = "";
         while (!CMD_EXIT.equals(cmd)) {
-            System.out.printf("Enter command, for help enter help\n");
+            System.out.print("Enter command, for help enter help\n");
             cmd = scanner.nextLine();
             switch (cmd) {
                 case CMD_EXIT:
@@ -74,19 +74,19 @@ public class ClientService {
     }
 
     private void printCommand() {
-        System.out.printf("### Help commands ###\n");
-        System.out.printf("### Login to chat: login ###\n");
-        System.out.printf("### Log out from chat: logout ###\n");
-        System.out.printf("### Send a private message to the user: send ###\n");
-        System.out.printf("### Send message to all user: broadcast ###\n");
-        System.out.printf("### Read message: read ###\n");
-        System.out.printf("### Viewe list of all users: users ###\n");
+        System.out.print("### Help commands ###\n");
+        System.out.print("### Login to chat: login ###\n");
+        System.out.print("### Log out from chat: logout ###\n");
+        System.out.print("### Send a private message to the user: send ###\n");
+        System.out.print("### Send message to all user: broadcast ###\n");
+        System.out.print("### Read message: read ###\n");
+        System.out.print("### Viewe list of all users: users ###\n");
     }
 
     private void login() {
-        System.out.printf("Enter login:\n");
+        System.out.print("Enter login:\n");
         final String login = scanner.nextLine();
-        System.out.printf("Enter password:\n");
+        System.out.print("Enter password:\n");
         final String password = scanner.nextLine();
         session = chatService.signIn(login, password);
         final String msg = (session == null) ? "OK" : "ERROR";
@@ -100,26 +100,26 @@ public class ClientService {
     private void read() {
         final List<Message> messages = chatService.getMessages(session);
         for (final Message message: messages) {
-            System.out.printf("New incoming message!\n");
+            System.out.print("New incoming message!\n");
             System.out.printf("From: %s\n", message.source);
             System.out.printf("Text: %s\n", message.text);
         }
     }
 
     private void send() {
-        System.out.printf("Enter the Recipient login:\n");
+        System.out.print("Enter the Recipient login:\n");
         final String login = scanner.nextLine();
-        System.out.printf("Enter message:\n");
+        System.out.print("Enter message:\n");
         final String message = scanner.nextLine();
         chatService.sendMessage(session, login, message);
     }
 
     private void users() {
-        chatService.getListLogin();
+        System.out.printf("Users:\n%s\n", chatService.getListLogin());
     }
 
     private void broadcast() {
-        System.out.printf("Enter message:\n");
+        System.out.print("Enter message:\n");
         final String message = scanner.nextLine();
         chatService.sendBroadCast(session, message);
     }

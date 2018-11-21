@@ -19,6 +19,7 @@ public class ClientService {
     private static final String CMD_SEND = "send";
     private static final String CMD_USERS = "users";
     private static final String CMD_BROADCAST = "broadcast";
+    private static final String CMD_HELP = "help";
     private static final String LOCAL_PART = "ChatServiceBeanService";
     private static final String LOCAL_NAMESPACE = "http://service.server.mychat.se.breev.ru/";
     private static final String WSDL = "http://localhost:8080/ChatService?wsdl";
@@ -41,7 +42,7 @@ public class ClientService {
     public void run() {
         String cmd = "";
         while (!CMD_EXIT.equals(cmd)) {
-            System.out.printf("Enter command:\n");
+            System.out.printf("Enter command, for help enter help\n");
             cmd = scanner.nextLine();
             switch (cmd) {
                 case CMD_EXIT:
@@ -64,9 +65,22 @@ public class ClientService {
                 case CMD_BROADCAST:
                     broadcast();
                     break;
+                case CMD_HELP:
+                    printCommand();
+                    break;
             }
         }
 
+    }
+
+    private void printCommand() {
+        System.out.printf("### Help commands ###\n");
+        System.out.printf("### Login to chat: login ###\n");
+        System.out.printf("### Log out from chat: logout ###\n");
+        System.out.printf("### Send a private message to the user: send ###\n");
+        System.out.printf("### Send message to all user: broadcast ###\n");
+        System.out.printf("### Read message: read ###\n");
+        System.out.printf("### Viewe list of all users: users ###\n");
     }
 
     private void login() {

@@ -34,7 +34,6 @@ public class UserServiceBean implements UserService {
         user.login = login;
         user.password = password;
         users.put(login, user);
-
     }
 
     @Override

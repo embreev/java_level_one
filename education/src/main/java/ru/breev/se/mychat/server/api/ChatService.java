@@ -48,4 +48,16 @@ public interface ChatService {
     @WebMethod
     void cleanMessage(@WebParam Session session);
 
+    @WebMethod
+    void contactsAll(@WebParam Session session);
+
+    @WebMethod
+    void contactCreate(@WebParam Session session, @WebParam String login);
+
+    @WebMethod
+    void contactRemove(@WebParam Session session, @WebParam String login);
+
+    @WebMethod
+    void contactsRemoveAll(@WebParam Session session);
+
 }

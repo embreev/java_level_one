@@ -1,15 +1,16 @@
 package ru.breev.se.mychat.client;
 
 import ru.breev.se.mychat.server.api.ChatService;
+import ru.breev.se.mychat.server.model.Contact;
 import ru.breev.se.mychat.server.model.Message;
 import ru.breev.se.mychat.server.model.Session;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ClientService {
     private static final String CMD_EXIT = "exit";
@@ -20,6 +21,10 @@ public class ClientService {
     private static final String CMD_SEND = "send";
     private static final String CMD_USERS = "users";
     private static final String CMD_BROADCAST = "broadcast";
+    private static final String CMD_CONTACTS_ALL = "contacts-all";
+    private static final String CMD_CONTACT_CREATE = "contact-create";
+    private static final String CMD_CONTACT_REMOVE = "contact-remove";
+    private static final String CMD_CONTACTS_REMOVE_ALL = "contacts-remove-all";
     private static final String CMD_HELP = "help";
     private static final String LOCAL_PART = "ChatServiceBeanService";
     private static final String LOCAL_NAMESPACE = "http://service.server.mychat.se.breev.ru/";
@@ -68,6 +73,18 @@ public class ClientService {
                     break;
                 case CMD_BROADCAST:
                     broadcast();
+                    break;
+                case CMD_CONTACTS_ALL:
+                    contactsAll();
+                    break;
+                case CMD_CONTACT_CREATE:
+                    contactCreate();
+                    break;
+                case CMD_CONTACT_REMOVE:
+                    contactRemove();
+                    break;
+                case CMD_CONTACTS_REMOVE_ALL:
+                    contactsRemoveAll();
                     break;
                 case CMD_HELP:
                     printCommand();
@@ -137,5 +154,28 @@ public class ClientService {
         System.out.print("Enter message:\n");
         final String message = scanner.nextLine();
         chatService.sendBroadCast(session, message);
+    }
+
+    private void contactsAll() {
+
+    }
+
+    private void contactCreate() {
+        if (session == null) return;
+        System.out.print("Enter contact login for add:\n");
+        final String login = scanner.nextLine();
+
+    }
+
+    private void contactRemove() {
+        if (session == null) return;
+        System.out.print("Enter contact login for remove:\n");
+        final String login = scanner.nextLine();
+
+    }
+
+    private void contactsRemoveAll() {
+        if (session == null) return;
+
     }
 }

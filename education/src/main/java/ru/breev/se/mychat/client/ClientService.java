@@ -15,6 +15,7 @@ public class ClientService {
     private static final String CMD_EXIT = "exit";
     private static final String CMD_LOGIN = "login";
     private static final String CMD_LOGOUT = "logout";
+    private static final String CMD_REGISTER = "register";
     private static final String CMD_READ = "read";
     private static final String CMD_SEND = "send";
     private static final String CMD_USERS = "users";
@@ -53,6 +54,9 @@ public class ClientService {
                 case CMD_LOGOUT:
                     logout();
                     break;
+                case CMD_REGISTER:
+                    register();
+                    break;
                 case CMD_READ:
                     read();
                     break;
@@ -74,13 +78,14 @@ public class ClientService {
     }
 
     private void printCommand() {
-        System.out.print("### Help commands ###\n");
-        System.out.print("### Login to chat: login ###\n");
-        System.out.print("### Log out from chat: logout ###\n");
-        System.out.print("### Send a private message to the user: send ###\n");
-        System.out.print("### Send message to all user: broadcast ###\n");
-        System.out.print("### Read message: read ###\n");
-        System.out.print("### Viewe list of all users: users ###\n");
+        System.out.print("### COMMANDS\n");
+        System.out.print("### Login to chat: login\n");
+        System.out.print("### Log out from chat: logout\n");
+        System.out.print("### Registration new user: register\n");
+        System.out.print("### Send a private message to the user: send\n");
+        System.out.print("### Send message to all user: broadcast\n");
+        System.out.print("### Read message: read\n");
+        System.out.print("### Viewe list of all users: users\n");
     }
 
     private void login() {
@@ -89,12 +94,22 @@ public class ClientService {
         System.out.print("Enter password:\n");
         final String password = scanner.nextLine();
         session = chatService.signIn(login, password);
-        final String msg = (session == null) ? "OK" : "ERROR";
+        final String msg = (session == null) ? "ERROR" : "OK";
         System.out.printf("Auth: %s\n", msg);
     }
 
     private void logout() {
         chatService.signOut(session);
+    }
+
+    private void register() {
+        System.out.print("Enter login:\n");
+        final String login = scanner.nextLine();
+        System.out.print("Enter password:\n");
+        final String password = scanner.nextLine();
+        session = chatService.signIn(login, password);
+        if (session == null && chatService.register(login, password)) System.out.print("User created successfully\n");
+        else System.out.print("User exists or error create user");
     }
 
     private void read() {

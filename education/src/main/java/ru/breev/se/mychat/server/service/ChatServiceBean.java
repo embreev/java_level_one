@@ -60,6 +60,7 @@ public final class ChatServiceBean implements ChatService {
 
     @Override
     @WebMethod
+//    public User getUser(Session session) { return sessionService.getUser(session); }
     public User getUser(Session session) { return sessionService.getUser(session); }
 
     @Override

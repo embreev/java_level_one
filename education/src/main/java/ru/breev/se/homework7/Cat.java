@@ -1,15 +1,29 @@
 package ru.breev.se.homework7;
 
-public class Cat {
-    private String name;
-    private int appetite;
+import java.util.Random;
 
-    public Cat(String name, int appetite) {
+public class Cat {
+    final Random random = new Random();
+    private final String name;
+    private final int appetite = random.nextInt(50);;
+    private static boolean satiety = false;
+
+    public Cat(String name) {
         this.name = name;
-        this.appetite = appetite;
+        System.out.println(name + ": " + appetite);
+    }
+
+    public boolean isSatiety() {
+        return satiety;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void eat(Plate p) {
-        p.decreaseFood(appetite);
+        satiety = p.getFood() - appetite >= 0 ? true : false;
+        if (isSatiety()) p.decreaseFood(appetite);
+        else System.out.println("not enough food for cat");
     }
 }

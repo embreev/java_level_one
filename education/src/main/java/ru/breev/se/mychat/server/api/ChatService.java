@@ -1,9 +1,6 @@
 package ru.breev.se.mychat.server.api;
 
-import ru.breev.se.mychat.server.model.Contact;
-import ru.breev.se.mychat.server.model.Message;
-import ru.breev.se.mychat.server.model.Session;
-import ru.breev.se.mychat.server.model.User;
+import ru.breev.se.mychat.server.model.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -51,13 +48,10 @@ public interface ChatService {
     void cleanMessage(@WebParam Session session);
 
     @WebMethod
-    void getContact(@WebParam Session session);
+    ContactBox getAllContacts(@WebParam Session session);
 
     @WebMethod
-    Set<Contact> getAllContacts(@WebParam Session session);
-
-    @WebMethod
-    void createContact(@WebParam Session session, @WebParam String login);
+    Contact createContact(@WebParam Session session, @WebParam String login);
 
     @WebMethod
     void removeContact(@WebParam Session session, @WebParam String login);

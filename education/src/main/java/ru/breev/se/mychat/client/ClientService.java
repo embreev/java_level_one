@@ -21,10 +21,10 @@ public class ClientService {
     private static final String CMD_SEND = "send";
     private static final String CMD_USERS = "users";
     private static final String CMD_BROADCAST = "broadcast";
-    private static final String CMD_CONTACTS_ALL = "contacts-all";
-    private static final String CMD_CONTACT_CREATE = "contact-create";
-    private static final String CMD_CONTACT_REMOVE = "contact-remove";
-    private static final String CMD_CONTACTS_REMOVE_ALL = "contacts-remove-all";
+    private static final String CMD_CONTACTS = "contacts";
+    private static final String CMD_CONTACT_ADD = "contact-add";
+    private static final String CMD_CONTACT_DEL = "contact-del";
+    private static final String CMD_CONTACTS_DEL = "contacts-del";
     private static final String CMD_HELP = "help";
     private static final String LOCAL_PART = "ChatServiceBeanService";
     private static final String LOCAL_NAMESPACE = "http://service.server.mychat.se.breev.ru/";
@@ -74,16 +74,16 @@ public class ClientService {
                 case CMD_BROADCAST:
                     broadcast();
                     break;
-                case CMD_CONTACTS_ALL:
+                case CMD_CONTACTS:
                     getAllContacts();
                     break;
-                case CMD_CONTACT_CREATE:
+                case CMD_CONTACT_ADD:
                     createContact();
                     break;
-                case CMD_CONTACT_REMOVE:
+                case CMD_CONTACT_DEL:
                     removeContact();
                     break;
-                case CMD_CONTACTS_REMOVE_ALL:
+                case CMD_CONTACTS_DEL:
                     removeAllContacts();
                     break;
                 case CMD_HELP:
@@ -103,6 +103,10 @@ public class ClientService {
         System.out.print("### Send message to all user: broadcast\n");
         System.out.print("### Read message: read\n");
         System.out.print("### Viewe list of all users: users\n");
+        System.out.print("### Add contact: contact-add\n");
+        System.out.print("### Show all contacts: contacts\n");
+        System.out.print("### Remove contact: contact-del\n");
+        System.out.print("### Remove all contacts: contacts-del\n");
     }
 
     private void login() {

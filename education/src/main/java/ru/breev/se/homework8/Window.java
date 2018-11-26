@@ -6,8 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window extends JFrame implements ActionListener {
-    final static Operation operation = new Operation();
-    final JTextField display = new JTextField("0.0", 1);
+    private final static Operation operation = new Operation();
+    private final JTextField display = new JTextField("", 1);
+    private String a = "";
+    private String b = "";
+    private final String OP_ADD = "+";
+    private final String OP_SUB = "-";
+    private final String OP_MUL = "*";
+    private final String OP_DEV = "/";
+    private final String OP_EQU = "=";
+    private String resultValue = display.getText();
+    private String command = "";
 
     public Window() {
         setTitle("Calculator");
@@ -39,7 +48,7 @@ public class Window extends JFrame implements ActionListener {
         panelBtn.add(btn[1]);
         btn[2] = new JButton(String.valueOf(9));
         panelBtn.add(btn[2]);
-        btn[3] = new JButton("+");
+        btn[3] = new JButton(OP_ADD);
         panelBtn.add(btn[3]);
         btn[4] = new JButton(String.valueOf(4));
         panelBtn.add(btn[4]);
@@ -47,7 +56,7 @@ public class Window extends JFrame implements ActionListener {
         panelBtn.add(btn[5]);
         btn[6] = new JButton(String.valueOf(6));
         panelBtn.add(btn[6]);
-        btn[7] = new JButton("-");
+        btn[7] = new JButton(OP_SUB);
         panelBtn.add(btn[7]);
         btn[8] = new JButton(String.valueOf(1));
         panelBtn.add(btn[8]);
@@ -55,24 +64,69 @@ public class Window extends JFrame implements ActionListener {
         panelBtn.add(btn[9]);
         btn[10] = new JButton(String.valueOf(3));
         panelBtn.add(btn[10]);
-        btn[11] = new JButton("*");
+        btn[11] = new JButton(OP_MUL);
         panelBtn.add(btn[11]);
         btn[12] = new JButton(String.valueOf(0));
         panelBtn.add(btn[12]);
         btn[13] = new JButton(".");
         panelBtn.add(btn[13]);
-        btn[14] = new JButton("=");
+        btn[14] = new JButton(OP_EQU);
         panelBtn.add(btn[14]);
-        btn[15] = new JButton("/");
+        btn[15] = new JButton(OP_DEV);
         panelBtn.add(btn[15]);
 
         setContentPane(panelMain);
 
-        for (int i = 0; i < btn.length; i++) btn[i].addActionListener(this);
+        for (JButton jb: btn) jb.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        display.setText(e.getActionCommand());
+        String clickBtn = e.getActionCommand();
+
+        resultValue = (OP_EQU.equals(clickBtn)) ? "" : resultValue + clickBtn;
+
+        if (OP_ADD.equals(clickBtn)) {
+            a = display.getText();
+            resultValue = "";
+            command = OP_ADD;
+        }
+        if (OP_SUB.equals(clickBtn)) {
+            a = display.getText();
+            resultValue = "";
+            command = OP_SUB;
+        }
+        if (OP_MUL.equals(clickBtn)) {
+            a = display.getText();
+            resultValue = "";
+            command = OP_MUL;
+        }
+        if (OP_DEV.equals(clickBtn)) {
+            a = display.getText();
+            resultValue = "";
+            command = OP_DEV;
+        }
+        if (OP_EQU.equals(clickBtn)) {
+            b = display.getText();
+            switch (command) {
+                case OP_ADD:
+                    System.out.println(operation.add(Float.parseFloat(a), Float.parseFloat(b)));
+                    resultValue = String.valueOf(operation.add(Float.parseFloat(a), Float.parseFloat(b)));
+                    break;
+                case OP_SUB:
+                    System.out.println(operation.substract(Float.parseFloat(a), Float.parseFloat(b)));
+                    resultValue = String.valueOf(operation.substract(Float.parseFloat(a), Float.parseFloat(b)));
+                    break;
+                case OP_MUL:
+                    System.out.println(operation.multiply(Float.parseFloat(a), Float.parseFloat(b)));
+                    resultValue = String.valueOf(operation.multiply(Float.parseFloat(a), Float.parseFloat(b)));
+                    break;
+                case OP_DEV:
+                    System.out.println(operation.devide(Float.parseFloat(a), Float.parseFloat(b)));
+                    resultValue = String.valueOf(operation.substract(Float.parseFloat(a), Float.parseFloat(b)));
+                    break;
+            }
+        }
+        display.setText(resultValue);
     }
 }

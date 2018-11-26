@@ -6,29 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window extends JFrame implements ActionListener {
-    private final JTextField display = new JTextField("0", 10);
-
-    public static float doOperation(float a, float b, String operation) {
-        float c = 0;
-        switch (operation) {
-            case "add":
-                c = a + b;
-                break;
-            case "subtrack":
-                c = a - b;
-                break;
-            case "multiply":
-                c = a * b;
-                break;
-            case "devide":
-                if (b != 0) c = a / b;
-                break;
-            default:
-                System.out.println("Command not found!");
-                break;
-        }
-        return c;
-    }
+    final static Operation operation = new Operation();
+    final JTextField display = new JTextField("0.0", 1);
 
     public Window() {
         setTitle("Calculator");
@@ -38,6 +17,8 @@ public class Window extends JFrame implements ActionListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         final JPanel panelMain = new JPanel(new GridLayout(3, 1));
+//        final JSeparator separator = new JSeparator();
+//        panelMain.add(separator);
         final JLabel label = new JLabel("MY CALCULATOR");
         label.setHorizontalAlignment(JLabel.CENTER);
         panelMain.add(label);
@@ -87,28 +68,11 @@ public class Window extends JFrame implements ActionListener {
 
         setContentPane(panelMain);
 
-        final String valueDisplay = display.getText();
-        for (int i = 0; i < btn.length; i++) {
-            btn[i].addActionListener(this);
-        }
+        for (int i = 0; i < btn.length; i++) btn[i].addActionListener(this);
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        final String valueBtn = actionEvent.getActionCommand();
-        final String valueDisplay = display.getText();
-        float resultValue = 0;
-        float valueInMemmory = Float.parseFloat(display.getText());
-
-        switch (valueBtn) {
-            case "+":
-                final float tempFloat = Float.parseFloat(valueDisplay);
-                final String operation = "add";
-                resultValue = doOperation(tempFloat, valueInMemmory, operation);
-                break;
-        }
-
-        display.setText(String.valueOf(resultValue));
-
+    public void actionPerformed(ActionEvent e) {
+        display.setText(e.getActionCommand());
     }
 }
